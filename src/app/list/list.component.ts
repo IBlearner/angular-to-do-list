@@ -16,6 +16,10 @@ export class ListComponent implements OnInit {
     new Task("find keys")
   ]
 
+  printTasks() {
+    console.log(this.tasks)
+  }
+
   constructor() { }
 
   ngOnInit(): void {

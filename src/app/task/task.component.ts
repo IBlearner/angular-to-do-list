@@ -11,6 +11,11 @@ export class TaskComponent implements OnInit {
   @Input() name!: String
   @Input() completed!: Boolean
 
+  toggleComplete() {
+    console.log(`task of id ${this.index} has been toggled`)
+    this.completed = !this.completed
+  }
+
   constructor() {
 
   }
