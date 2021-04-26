@@ -1,1 +1,5 @@
 <p>list works!</p>
+<div *ngFor="let task of tasks; let i = index">
+    <div>{{ task.name }}</div>
+    <div>{{ task.completed ? "Completed" : "Not completed yet" }}</div>
+</div>

@@ -9,7 +9,11 @@ import { Task } from "../models/Task"
 export class ListComponent implements OnInit {
 
   tasks: Task[] = [
-    new Task("homework")
+    new Task("homework"),
+    new Task("vacuum house"),
+    new Task("go to the gym"),
+    new Task("purchase groceries"),
+    new Task("find keys")
   ]
 
   constructor() { }
