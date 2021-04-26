@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from "../models/Task"
 
 @Component({
   selector: 'app-list',
@@ -6,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+
+  tasks: Task[] = [
+    new Task("homework")
+  ]
 
   constructor() { }
 
