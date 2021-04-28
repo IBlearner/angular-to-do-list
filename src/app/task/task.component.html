@@ -1,8 +1,8 @@
 <div class="container">
     <h1>{{ index }}: {{ name }}</h1>
     <div>
-        <button (click)="toggleComplete()">{{ completed ? "Completed" : "Not completed"}}</button>
-        <button (click)="deleteTask()">Delete this task</button>
+        <button class="toggle" (click)="sendTaskIndex($event)">{{ completed ? "Completed" : "Not completed"}}</button>
+        <button class="delete" hello="hello" (click)="sendTaskIndex($event)">Delete this task</button>
     </div>
     <h2>{{ completed ? "Completed" : "Not completed"}}</h2>
 </div>

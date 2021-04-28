@@ -7,21 +7,19 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class TaskComponent implements OnInit {
 
-  @Input() index!: Number
-  @Input() name!: String
-  @Input() completed!: Boolean
+  @Input() index!: number
+  @Input() name!: string
+  @Input() completed!: boolean
 
-  @Output() emitToggleComplete = new EventEmitter<Number>()
+  @Output() emitTaskIndex = new EventEmitter<{x: number, y: MouseEvent}>()
 
-  toggleComplete(): void{
-    console.log(`task of id ${this.index} has been toggled`)
-    this.emitToggleComplete.emit(this.index)
-  }
-
-  deleteTask(): void {
-    console.log(`Going to delete task ${this.index}`)
-    this.emitToggleComplete.emit(this.index)
-  }
+  
+  sendTaskIndex(x: any): void {
+    console.log(`sending id: ${this.index}`)
+    let action = {x: this.index, y: x.target.className}
+    console.log(action)
+    this.emitTaskIndex.emit(action)
+  }  
 
   constructor() {
 
