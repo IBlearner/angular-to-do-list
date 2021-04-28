@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from "../models/Task"
+import { Action } from "../models/Action"
 
 @Component({
   selector: 'app-list',
@@ -20,13 +21,35 @@ export class ListComponent implements OnInit {
     console.log(this.tasks)
   }
 
-  toggleComplete(index: Number) {
+  handleEmitter(x: Action) {
+    switch(x.action) {
+      default:
+        console.log("Action has been fallen through somehow.")
+        break
+      case "toggle":
+        this.toggleComplete(x.index)
+        break
+      case "delete":
+        this.deleteTask(x.index)
+        break
+    }
+  }
+
+  toggleComplete(index: number) {
     this.tasks.forEach((task, y) => {
       if (index === y) {
         task.completed = !task.completed
       }
     });
     console.log(`${index} is toggled`)
+  }
+
+  deleteTask(index: number) {
+    let mapTasks = this.tasks.filter((x, y) => {
+      return (index !== y)
+    })
+    this.tasks = mapTasks
+    console.log(`Deleted ${index}`)
   }
 
   constructor() { }
