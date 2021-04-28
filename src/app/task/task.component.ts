@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-task',
@@ -11,9 +11,16 @@ export class TaskComponent implements OnInit {
   @Input() name!: String
   @Input() completed!: Boolean
 
-  toggleComplete() {
+  @Output() emitToggleComplete = new EventEmitter<Number>()
+
+  toggleComplete(): void{
     console.log(`task of id ${this.index} has been toggled`)
-    this.completed = !this.completed
+    this.emitToggleComplete.emit(this.index)
+  }
+
+  deleteTask(): void {
+    console.log(`Going to delete task ${this.index}`)
+    this.emitToggleComplete.emit(this.index)
   }
 
   constructor() {

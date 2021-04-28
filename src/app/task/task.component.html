@@ -2,6 +2,7 @@
     <h1>{{ index }}: {{ name }}</h1>
     <div>
         <button (click)="toggleComplete()">{{ completed ? "Completed" : "Not completed"}}</button>
+        <button (click)="deleteTask()">Delete this task</button>
     </div>
     <h2>{{ completed ? "Completed" : "Not completed"}}</h2>
 </div>
