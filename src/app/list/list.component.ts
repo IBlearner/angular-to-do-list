@@ -9,13 +9,30 @@ import { Action } from "../models/Action"
 })
 export class ListComponent implements OnInit {
 
-  tasks: Task[] = [
-    new Task("homework"),
-    new Task("vacuum house"),
-    new Task("go to the gym"),
-    new Task("purchase groceries"),
-    new Task("find keys")
-  ]
+  // tasks: Task[] = [
+  //   new Task("homework"),
+  //   new Task("vacuum house"),
+  //   new Task("go to the gym"),
+  //   new Task("purchase groceries"),
+  //   new Task("find keys")
+  // ]
+
+  tasks: Task[] = []
+
+  async getTasks() {
+    let data: any = await fetch("http://localhost:3000/tasks", {
+        method: "GET",
+        // mode: "no-cors",
+        // headers: {
+        //     'Accept': 'application/json',
+        //     'Content-Type': 'application/json'  
+        // }
+    })
+    if (!data.ok) return console.log("There's an error somewhere")
+    data = await data.json()
+    this.tasks = data
+    console.log(this.tasks)
+  }
 
   printTasks() {
     console.log(this.tasks)
@@ -44,15 +61,23 @@ export class ListComponent implements OnInit {
     console.log(`${index} is toggled`)
   }
 
-  deleteTask(index: number) {
+  async deleteTask(index: number) {
     let mapTasks = this.tasks.filter((x, y) => {
       return (index !== y)
     })
     this.tasks = mapTasks
     console.log(`Deleted ${index}`)
+
+    let data = await fetch(`http://localhost:3000/tasks/${6}`, {
+      method: "DELETE"
+    })
+    console.log(data.status)
   }
 
-  constructor() { }
+  constructor() {
+    this.getTasks()
+    console.log(this.tasks)
+  }
 
   ngOnInit(): void {
   }

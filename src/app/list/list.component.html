@@ -1,4 +1,4 @@
 <button (click)="printTasks()">Click here to print all tasks</button>
 <div *ngFor="let task of tasks; let i = index">
-    <app-task [index]="i" [name]="task.name" [completed]="task.completed" (emitTaskIndex)="handleEmitter($event)"></app-task>
+    <app-task [index]="i" [name]="task.taskName" [completed]="task.completed" (emitTaskIndex)="handleEmitter($event)"></app-task>
 </div>

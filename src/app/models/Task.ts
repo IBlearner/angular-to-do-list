@@ -1,7 +1,7 @@
 export class Task {
-    name!: string
+    taskName!: string
     completed: boolean = false
-    constructor (name: string) {
-        this.name = name
+    constructor (taskName: string) {
+        this.taskName = taskName
     }
 }
