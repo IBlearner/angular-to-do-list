@@ -35,6 +35,7 @@ export class ListComponent implements OnInit {
   }
 
   printTasks() {
+    this.getTasks()
     console.log(this.tasks)
   }
 
@@ -52,26 +53,35 @@ export class ListComponent implements OnInit {
     }
   }
 
-  toggleComplete(index: number) {
-    this.tasks.forEach((task, y) => {
-      if (index === y) {
-        task.completed = !task.completed
-      }
-    });
-    console.log(`${index} is toggled`)
+  async toggleComplete(index: number) {
+    // this.tasks.forEach((task, y) => {
+    //   if (index === y) {
+    //     task.completed = !task.completed
+    //   }
+    // });
+    // console.log(`${index} is toggled`)
   }
 
   async deleteTask(index: number) {
-    let mapTasks = this.tasks.filter((x, y) => {
-      return (index !== y)
-    })
-    this.tasks = mapTasks
-    console.log(`Deleted ${index}`)
+    // let mapTasks = this.tasks.filter((x, y) => {
+    //   return (index !== y)
+    // })
+    // this.tasks = mapTasks
+    // console.log(`Deleted ${index}`)
 
-    let data = await fetch(`http://localhost:3000/tasks/${6}`, {
-      method: "DELETE"
+    let data = await fetch(`http://localhost:3000/tasks`, {
+      method: "DELETE",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"id": index})
     })
-    console.log(data.status)
+    if (data.ok) {
+      console.log(`Task with id ${index} has been deleted.`)
+    } else {
+      console.log("Cannot delete this task.")
+    }
   }
 
   constructor() {
