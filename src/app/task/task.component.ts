@@ -8,7 +8,7 @@ import { Action } from "../models/Action"
 })
 export class TaskComponent implements OnInit {
 
-  @Input() index!: number
+  @Input() id!: number
   @Input() name!: string
   @Input() completed!: boolean
 
@@ -16,7 +16,7 @@ export class TaskComponent implements OnInit {
 
   //x is a MouseEvent however if it is of that type it cannot be converted to string for some reason.
   sendTaskIndex(x: any): void {
-    let action = new Action(this.index, x.target.className)
+    let action = new Action(this.id, x.target.className)
     console.log(action)
     this.emitTaskIndex.emit(action)
   }  
