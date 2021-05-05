@@ -21,17 +21,22 @@ export class ListComponent implements OnInit {
 
   async getTasks() {
     let data: any = await fetch("http://localhost:3000/tasks", {
-        method: "GET",
-        // mode: "no-cors",
-        // headers: {
-        //     'Accept': 'application/json',
-        //     'Content-Type': 'application/json'  
-        // }
+      method: "GET",
+      // headers: {
+      //     'Accept': 'application/json',
+      //     'Content-Type': 'application/json'  
+      // }
     })
     if (!data.ok) return console.log("There's an error somewhere")
-    data = await data.json()
-    this.tasks = data
-    console.log(this.tasks)
+    console.log(data)
+
+    try {
+      data = await data.json()
+      this.tasks = data
+      console.log(this.tasks)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   printTasks() {
@@ -46,20 +51,29 @@ export class ListComponent implements OnInit {
         break
       case "toggle":
         this.toggleComplete(x.index)
+        console.log("toggle has been hit")
         break
       case "delete":
         this.deleteTask(x.index)
+        console.log("delete has been hit")
         break
     }
   }
 
   async toggleComplete(index: number) {
-    // this.tasks.forEach((task, y) => {
-    //   if (index === y) {
-    //     task.completed = !task.completed
-    //   }
-    // });
-    // console.log(`${index} is toggled`)
+    let data = await fetch(`http://localhost:3000/tasks`, {
+      method: "PATCH",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"id": index})
+    })
+    if (data.ok) {
+      console.log(`Task with id ${index} has been toggled.`)
+    } else {
+      console.log("Cannot toggle this task.")
+    }
   }
 
   async deleteTask(index: number) {
@@ -67,7 +81,7 @@ export class ListComponent implements OnInit {
     //   return (index !== y)
     // })
     // this.tasks = mapTasks
-    // console.log(`Deleted ${index}`)
+    // console.log(`Deleted ${index}`)`
 
     let data = await fetch(`http://localhost:3000/tasks`, {
       method: "DELETE",
